@@ -2,9 +2,19 @@
 #include "sound.h"
 
 static void loadSounds(void);
+/**
+   Mix_Chunk:
+   @param int allocated
+   @param uint8 *abuf,
+   @param uint32 alen,
+   @param uint8 volume // Per sample volume
 
+   Mix_Music:
+   typedef struct _mix_music //Needs to be used as a pointer
+ */
 static Mix_Chunk *sounds[SND_MAX];
 static Mix_Music *music;
+
 
 void initSounds(void)
 {
@@ -43,4 +53,5 @@ static void loadSounds(void)
 	sounds[SND_ALIEN_FIRE] = Mix_LoadWAV("sound/196914__dpoggioli__laser-gun.ogg");
 	sounds[SND_PLAYER_DIE] = Mix_LoadWAV("sound/245372__quaker540__hq-explosion.ogg");
 	sounds[SND_ALIEN_DIE] = Mix_LoadWAV("sound/10 Guage Shotgun-SoundBible.com-74120584.ogg");
+  sounds[SND_POINTS] = Mix_LoadWAV("sound/342749__rhodesmas__notification-01.ogg");
 }
