@@ -1,4 +1,4 @@
-PROG = shooter08
+PROG = shooter09
 CC = gcc
 
 include common.mk

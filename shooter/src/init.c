@@ -1,5 +1,4 @@
 
-
 #include "init.h"
 
 void initSDL(void)
@@ -16,13 +15,15 @@ void initSDL(void)
 		exit(1);
 	}
 
-	app.window = SDL_CreateWindow("Shooter 08", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
+	app.window = SDL_CreateWindow("Shooter 09", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 
 	app.renderer = SDL_CreateRenderer(app.window, -1, rendererFlags);
 	
 	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
+	
+	SDL_ShowCursor(0);
 }
 
 void cleanup(void)

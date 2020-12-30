@@ -1,4 +1,5 @@
 
+
 #include "input.h"
 
 void doKeyUp(SDL_KeyboardEvent *event)

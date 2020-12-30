@@ -1,5 +1,4 @@
 
-
 #include "main.h"
 
 static void capFrameRate(long *then, float *remainder);

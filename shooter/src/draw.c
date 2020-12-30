@@ -1,5 +1,4 @@
 
-
 #include "draw.h"
 
 void prepareScene(void)
@@ -33,4 +32,16 @@ void blit(SDL_Texture *texture, int x, int y)
 	SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.h);
 	
 	SDL_RenderCopy(app.renderer, texture, NULL, &dest);
+}
+
+void blitRect(SDL_Texture *texture, SDL_Rect *src, int x, int y)
+{
+	SDL_Rect dest;
+	
+	dest.x = x;
+	dest.y = y;
+	dest.w = src->w;
+	dest.h = src->h;
+	
+	SDL_RenderCopy(app.renderer, texture, src, &dest);
 }
