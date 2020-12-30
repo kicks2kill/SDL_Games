@@ -9,7 +9,8 @@ DEPS += defs.h structs.h
 _OBJS += draw.o
 _OBJS += init.o input.o
 _OBJS += main.o
-_OBJS += stage.o
+_OBJS += sound.o stage.o
+_OBJS += text.o
 _OBJS += util.o
 
 OBJS = $(patsubst %,$(OUT)/%,$(_OBJS))

@@ -14,6 +14,10 @@ int main(int argc, char *argv[])
 	
 	atexit(cleanup);
 	
+	initSounds();
+	
+	initFonts();
+	
 	initStage();
 	
 	then = SDL_GetTicks();

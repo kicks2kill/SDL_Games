@@ -1,4 +1,5 @@
 
+
 typedef struct Entity Entity;
 typedef struct Explosion Explosion;
 typedef struct Debris Debris;
@@ -54,6 +55,7 @@ typedef struct {
 	Entity bulletHead, *bulletTail;
 	Explosion explosionHead, *explosionTail;
 	Debris debrisHead, *debrisTail;
+	int score;
 } Stage;
 
 typedef struct {
