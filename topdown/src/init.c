@@ -1,4 +1,5 @@
 
+
 #include "init.h"
 
 void initSDL(void)
@@ -23,7 +24,7 @@ void initSDL(void)
 
     Mix_AllocateChannels(MAX_SND_CHANNELS);
 
-	app.window = SDL_CreateWindow("Battle Arena DONK! 3", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
+	app.window = SDL_CreateWindow("Battle Arena DONK! 4", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 
@@ -39,6 +40,8 @@ void initGame(void)
 	initFonts();
 	
 	initBullets();
+	
+	initItems();
 }
 
 void cleanup(void)

@@ -1,10 +1,10 @@
 
-
 #include "bullets.h"
 
 static void fireDonkUzi(void);
 static void fireDonkShotgun(void);
 static void fireDonkPistol(void);
+static void bulletHitEntity(Entity *b);
 
 static SDL_Texture *donkBullet;
 
@@ -45,6 +45,9 @@ static void fireDonkUzi(void)
 	b->texture = donkBullet;
 	b->health = FPS * 2;
 	b->angle = player->angle;
+	b->radius = 16;
+	b->side = SIDE_PLAYER;
+	SDL_QueryTexture(b->texture, NULL, NULL, &b->w, &b->h);
 	
 	calcSlope(app.mouse.x, app.mouse.y, b->x, b->y, &b->dx, &b->dy);
 	
@@ -77,6 +80,9 @@ static void fireDonkShotgun(void)
 		b->texture = donkBullet;
 		b->health = FPS * 2;
 		b->angle = player->angle;
+		b->radius = 16;
+		b->side = SIDE_PLAYER;
+		SDL_QueryTexture(b->texture, NULL, NULL, &b->w, &b->h);
 		
 		destX = dx + (rand() % 24 - rand() % 24);
 		destY = dy + (rand() % 24 - rand() % 24);
@@ -104,6 +110,9 @@ static void fireDonkPistol(void)
 	b->texture = donkBullet;
 	b->health = FPS * 2;
 	b->angle = player->angle;
+	b->radius = 8;
+	b->side = SIDE_PLAYER;
+	SDL_QueryTexture(b->texture, NULL, NULL, &b->w, &b->h);
 	
 	calcSlope(app.mouse.x, app.mouse.y, b->x, b->y, &b->dx, &b->dy);
 	
@@ -124,6 +133,8 @@ void doBullets(void)
 		b->x += b->dx;
 		b->y += b->dy;
 		
+		bulletHitEntity(b);
+		
 		if (--b->health <= 0)
 		{
 			if (b == stage.bulletTail)
@@ -137,6 +148,27 @@ void doBullets(void)
 		}
 		
 		prev = b;
+	}
+}
+
+static void bulletHitEntity(Entity *b)
+{
+	Entity *e;
+	int distance;
+	
+	for (e = stage.entityHead.next ; e != NULL ; e = e->next)
+	{
+		if (e->side != SIDE_NONE && e->side != b->side)
+		{
+			distance = getDistance(e->x, e->y, b->x, b->y);
+			
+			if (distance < e->radius + b->radius)
+			{
+				b->health = 0;
+				e->health--;
+				return;
+			}
+		}
 	}
 }
 

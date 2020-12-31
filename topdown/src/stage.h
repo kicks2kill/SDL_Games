@@ -1,6 +1,7 @@
 
 #include "common.h"
 
+extern void addEnemy(int x, int y);
 extern void blit(SDL_Texture *texture, int x, int y, int center);
 extern void doBullets(void);
 extern void doEntities(void);

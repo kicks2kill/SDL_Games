@@ -1,4 +1,5 @@
 
+
 typedef struct Texture Texture;
 typedef struct Entity Entity;
 
@@ -21,10 +22,12 @@ typedef struct {
 } Mouse;
 
 struct Entity {
+	int side;
 	float x;
 	float y;
 	int w;
 	int h;
+	int radius;
 	float dx;
 	float dy;
 	int health;
@@ -32,6 +35,9 @@ struct Entity {
 	int angle;
 	int weaponType;
 	SDL_Texture *texture;
+	void (*tick)(void);
+	void (*touch)(Entity *other);
+	void (*die)(void);
 	Entity *next;
 };
 
@@ -45,6 +51,7 @@ typedef struct {
 } App;
 
 typedef struct {
+	int score;
 	Entity entityHead, *entityTail;
 	Entity bulletHead, *bulletTail;
 	int ammo[WPN_MAX];

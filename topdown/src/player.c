@@ -1,4 +1,5 @@
 
+
 #include "player.h"
 
 void initPlayer(void)
@@ -12,12 +13,13 @@ void initPlayer(void)
 	player->health = 5;
 	player->x = SCREEN_WIDTH / 2;
 	player->y = SCREEN_HEIGHT / 2;
+	player->radius = 24;
+	player->side = SIDE_PLAYER;
+	SDL_QueryTexture(player->texture, NULL, NULL, &player->w, &player->h);
 	
 	stage.ammo[WPN_PISTOL] = 12;
 	stage.ammo[WPN_UZI] = 100;
 	stage.ammo[WPN_SHOTGUN] = 8;
-	
-	SDL_QueryTexture(player->texture, NULL, NULL, &player->w, &player->h);
 }
 
 void doPlayer(void)

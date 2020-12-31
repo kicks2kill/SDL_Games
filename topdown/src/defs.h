@@ -1,4 +1,5 @@
 
+
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
 #define STRNCPY(dest, src, n) strncpy(dest, src, n); dest[n - 1] = '\0'
@@ -37,4 +38,11 @@ enum
 	WPN_UZI,
 	WPN_SHOTGUN,
 	WPN_MAX
+};
+
+enum
+{
+	SIDE_NONE,
+	SIDE_PLAYER,
+	SIDE_ENEMY
 };

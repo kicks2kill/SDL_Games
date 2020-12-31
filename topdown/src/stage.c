@@ -1,4 +1,5 @@
 
+
 #include "stage.h"
 
 static void logic(void);
@@ -6,9 +7,11 @@ static void draw(void);
 static void drawGrid(void);
 static void drawHud(void);
 static void drawWeaponInfo(char *name, int type, int x, int y);
+static void spawnEnemy(void);
 
 static SDL_Texture *targetterTexture;
 static SDL_Texture *gridTexture;
+static int enemySpawnTimer;
 
 void initStage(void)
 {
@@ -22,6 +25,8 @@ void initStage(void)
 	gridTexture = loadTexture("gfx/grid.png");
 	
 	initPlayer();
+	
+	enemySpawnTimer = 0;
 }
 
 static void logic(void)
@@ -31,6 +36,43 @@ static void logic(void)
 	doEntities();
 	
 	doBullets();
+	
+	spawnEnemy();
+}
+
+static void spawnEnemy(void)
+{
+	int x, y;
+	
+	if (--enemySpawnTimer <= 0)
+	{
+		switch (rand() % 4)
+		{
+			case 0:
+				x = -100;
+				y = rand() % SCREEN_HEIGHT;
+				break;
+				
+			case 1:
+				x = SCREEN_WIDTH + 100;
+				y = rand() % SCREEN_HEIGHT;
+				break;
+				
+			case 2:
+				x = rand() % SCREEN_WIDTH;
+				y = -100;
+				break;
+				
+			case 3:
+				x = rand() % SCREEN_WIDTH;
+				y = SCREEN_HEIGHT + 100;
+				break;
+		}
+		
+		addEnemy(x, y);
+		
+		enemySpawnTimer = FPS + (rand() % FPS);
+	}
 }
 
 static void draw(void)
@@ -50,7 +92,7 @@ static void drawHud(void)
 {
 	drawText(10, 10, 255, 255, 255, TEXT_LEFT, "HEALTH:%d", player->health);
 	
-	drawText(250, 10, 255, 255, 255, TEXT_LEFT, "SCORE:%05d", 0);
+	drawText(250, 10, 255, 255, 255, TEXT_LEFT, "SCORE:%05d", stage.score);
 	
 	drawWeaponInfo("PISTOL", WPN_PISTOL, 550, 10);
 	
